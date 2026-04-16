@@ -1,6 +1,14 @@
 <?php
-include("conexion.php");
-$resultado = $conexion->query("SELECT * FROM animales");
+include("Conexion.php");
+
+if (isset($_GET['buscar'])) {
+    $buscar = $_GET['buscar'];
+    $sql = "SELECT * FROM animales WHERE nombre LIKE '%$buscar%' OR especie LIKE '%$buscar%'";
+} else {
+    $sql = "SELECT * FROM animales";
+}
+
+$resultado = $conexion->query($sql);
 ?>
 
 <!DOCTYPE html>
@@ -11,6 +19,14 @@ $resultado = $conexion->query("SELECT * FROM animales");
 <body>
 
 <h2>Animales en adopción</h2>
+
+<form method="GET">
+    Buscar:
+    <input type="text" name="buscar">
+    <button type="submit">Buscar</button>
+</form>
+
+<br>
 
 <table border="1">
 <tr>
@@ -28,11 +44,12 @@ $resultado = $conexion->query("SELECT * FROM animales");
     <td><?php echo $row['nombre']; ?></td>
     <td><?php echo $row['especie']; ?></td>
     <td><?php echo $row['edad']; ?></td>
-    <td><?php echo $row['tamaño']; ?></td>
+    <td><?php echo $row['tamano']; ?></td>
     <td><?php echo $row['ubicacion']; ?></td>
     <td><?php echo $row['estatus']; ?></td>
     <td>
-        <a href="editar.php?id=<?php echo $row['id']; ?>">Editar</a> |
+        <a href="editar.php?id=<?php echo $row['id']; ?>">Editar</a>
+        |
         <a href="eliminar.php?id=<?php echo $row['id']; ?>">Eliminar</a>
     </td>
 </tr>

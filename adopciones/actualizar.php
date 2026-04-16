@@ -1,5 +1,5 @@
 <?php
-include("conexion.php");
+include("Conexion.php");
 
 $id = $_POST['id'];
 $nombre = $_POST['nombre'];
@@ -12,7 +12,7 @@ $sql = "UPDATE animales SET
 nombre='$nombre',
 especie='$especie',
 edad='$edad',
-tamaño='$tamano',
+tamano='$tamano',
 ubicacion='$ubicacion'
 WHERE id=$id";
 
